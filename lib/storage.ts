@@ -163,6 +163,11 @@ export class StorageService {
     
     return count;
   }
+
+  async deleteJob(jobId: string): Promise<void> {
+    const jobPath = this.getJobPath(jobId);
+    await fs.rm(jobPath, { recursive: true, force: true });
+  }
 }
 
 export const storage = StorageService.getInstance();

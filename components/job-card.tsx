@@ -1,11 +1,12 @@
 "use client"
 
+import { useState } from "react"
 import { JobMetadata } from "@/lib/storage"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
-import { Download, FileIcon, Loader2, AlertCircle, CheckCircle2, Archive } from "lucide-react"
+import { Download, FileIcon, Loader2, AlertCircle, CheckCircle2, Archive, Trash2 } from "lucide-react"
 import { formatDistanceToNow } from "date-fns"
 
 interface JobCardProps {
@@ -13,6 +14,7 @@ interface JobCardProps {
 }
 
 export function JobCard({ job }: JobCardProps) {
+  const [isDeleting, setIsDeleting] = useState(false)
   const isCompleted = job.status === "completed"
   const isFailed = job.status === "failed"
   const isProcessing = ["downloading", "zipping", "pending"].includes(job.status)
@@ -59,9 +61,32 @@ export function JobCard({ job }: JobCardProps) {
                 </a>
               </Button>
             )}
+            
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="h-10 w-10 sm:w-12 p-0 rounded-xl border-border/40 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/30 transition-all active:scale-95 shadow-sm"
+              onClick={async () => {
+                if (!window.confirm("Are you sure you want to delete this asset?")) return
+                setIsDeleting(true)
+                try {
+                  const res = await fetch(`/api/jobs/${job.id}`, { method: "DELETE" })
+                  if (!res.ok) throw new Error("Failed to delete")
+                } catch (err) {
+                  console.error(err)
+                  alert("Failed to delete asset")
+                } finally {
+                  setIsDeleting(false)
+                }
+              }}
+              disabled={isDeleting}
+            >
+              {isDeleting ? <Loader2 className="h-5 w-5 animate-spin" /> : <Trash2 className="h-5 w-5" />}
+            </Button>
+
             {isFailed && (
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-destructive/10 text-destructive text-sm font-medium border border-destructive/20">
-                <AlertCircle className="h-4 w-4" /> {job.error || "Failed to fetch"}
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-destructive/10 text-destructive text-sm font-medium border border-destructive/20 ml-auto">
+                <AlertCircle className="h-4 w-4" /> {job.error || "Failed"}
               </div>
             )}
           </div>
