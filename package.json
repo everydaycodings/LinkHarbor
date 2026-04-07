@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
     "archiver": "^7.0.1",
     "axios": "^1.14.0",
     "class-variance-authority": "^0.7.1",

@@ -203,13 +203,6 @@ export default function Dashboard() {
           </div>
         </section>
       </main>
-
-      <footer className="py-12 border-t mt-20">
-        <div className="container mx-auto px-4 text-center text-xs text-muted-foreground">
-          <p>© 2026 LinkHarbor. High-speed file relay service.</p>
-          <p className="mt-2">Files are automatically deleted after 24 hours.</p>
-        </div>
-      </footer>
     </div>
   )
 }
