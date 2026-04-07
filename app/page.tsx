@@ -94,16 +94,18 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background hero-gradient selection:bg-primary/20">
       <header className="border-b bg-background/50 backdrop-blur-md sticky top-0 z-50">
         <div className="container max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground">
-              <DownloadCloud className="h-5 w-5" />
+          <div className="flex items-center gap-2.5">
+            <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center text-primary-foreground shadow-lg shadow-primary/20">
+              <DownloadCloud className="h-5.5 w-5.5" />
             </div>
-            <h1 className="text-xl font-bold tracking-tight">LinkHarbor</h1>
+            <h1 className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70">
+              LinkHarbor
+            </h1>
           </div>
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <span className="hidden sm:flex items-center gap-1.5"><Zap className="h-3.5 w-3.5" /> High Speed</span>
-            <span className="hidden sm:flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5" /> Secure</span>
-            <span className="hidden sm:flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> 24h Expiry</span>
+          <div className="flex items-center gap-3 sm:gap-6 text-xs sm:text-sm font-medium text-muted-foreground">
+            <span className="flex items-center gap-1.5"><Zap className="h-3.5 w-3.5 text-primary" /><span className="hidden xs:inline">High Speed</span></span>
+            <span className="hidden sm:flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-primary" /> Secure</span>
+            <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5 text-primary" /><span className="hidden xs:inline">24h Expiry</span></span>
           </div>
         </div>
       </header>
@@ -111,32 +113,40 @@ export default function Dashboard() {
       <main className="container max-w-4xl mx-auto px-4 py-12 space-y-12">
         {/* Hero Section */}
         <div className="text-center space-y-4 max-w-2xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight gradient-text">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight gradient-text leading-tight sm:leading-tight">
             Bypass Slow Networks
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base sm:text-lg text-muted-foreground px-2">
             Download large files instantly using our high-speed VPS relay. 
             Single URLs or bulk .txt imports supported.
           </p>
         </div>
 
         {/* Input Card */}
-        <Card className="glass shadow-xl border-primary/10 overflow-hidden relative">
-          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50" />
-          <CardContent className="p-6 sm:p-8">
-             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+        <Card className="glass shadow-2xl border-primary/10 overflow-hidden relative">
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50 animate-pulse" />
+          <CardContent className="p-5 sm:p-10">
+             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                <div className="relative flex-1">
-                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/50" />
                  <Input 
                    placeholder="Paste file URL here..." 
-                   className="pl-10 h-12 bg-background/50 border-border/50 focus-visible:ring-primary shadow-inner"
+                   className="pl-12 h-14 text-base bg-background/40 border-border/40 focus-visible:ring-primary/50 shadow-inner rounded-xl"
                    value={urlInput}
                    onChange={(e) => setUrlInput(e.target.value)}
                  />
                </div>
-               <div className="flex gap-2">
-                 <Button type="submit" disabled={isLoading || !urlInput.trim()} className="h-12 px-6 font-semibold shadow-lg shadow-primary/20">
-                   {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <><Plus className="h-4 w-4 mr-2" /> Fetch</>}
+               <div className="flex flex-row gap-3">
+                 <Button 
+                   type="submit" 
+                   disabled={isLoading || !urlInput.trim()} 
+                   className="h-14 flex-1 text-base font-bold shadow-xl shadow-primary/20 rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98]"
+                 >
+                   {isLoading ? (
+                     <Loader2 className="h-5 w-5 animate-spin" />
+                   ) : (
+                     <><Plus className="h-5 w-5 mr-2" /> Fetch URL</>
+                   )}
                  </Button>
                  <div className="relative">
                    <Input 
@@ -146,17 +156,23 @@ export default function Dashboard() {
                      id="file-upload" 
                      onChange={handleFileUpload}
                    />
-                   <Button asChild variant="outline" className="h-12 px-4 shadow-sm border-border/50 bg-secondary/30">
-                     <label htmlFor="file-upload" className="cursor-pointer">
-                        <FileText className="h-4 w-4" />
+                   <Button 
+                     asChild 
+                     variant="outline" 
+                     className="h-14 w-14 p-0 shadow-sm border-border/40 bg-secondary/20 hover:bg-secondary/40 rounded-xl transition-all"
+                   >
+                     <label htmlFor="file-upload" className="cursor-pointer flex items-center justify-center">
+                        <FileText className="h-6 w-6" />
                      </label>
                    </Button>
                  </div>
                </div>
              </form>
-             <p className="mt-4 text-center text-xs text-muted-foreground">
-               Tip: You can also drag and drop a .txt file with multiple URLs to batch download.
-             </p>
+             <div className="mt-6 flex items-center justify-center gap-2 text-xs text-muted-foreground/60">
+               <div className="h-px w-8 bg-border/40" />
+               <span>Supported formats: Single URL or .txt list</span>
+               <div className="h-px w-8 bg-border/40" />
+             </div>
           </CardContent>
         </Card>
 
