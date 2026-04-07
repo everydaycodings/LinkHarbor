@@ -16,12 +16,12 @@ export function Footer() {
               <span className="text-lg font-bold tracking-tight">LinkHarbor</span>
             </div>
             <p className="text-sm text-muted-foreground/80 leading-relaxed max-w-xs">
-              A high-speed file relay and downloader designed to bypass network restrictions and accelerate your digital life. 
+              A high-speed file relay and downloader designed to bypass network restrictions and accelerate your digital life.
               Secure, fast, and simple.
             </p>
             <div className="flex items-center gap-2 text-xs text-muted-foreground pt-2">
-               <Heart size={14} className="text-red-500" weight="fill" />
-               <span>Crafted with passion for the open-source community.</span>
+              <Heart size={14} className="text-red-500" weight="fill" />
+              <span>Crafted with passion for the open-source community.</span>
             </div>
           </div>
 
@@ -30,9 +30,9 @@ export function Footer() {
             <h4 className="text-sm font-semibold uppercase tracking-wider">Project</h4>
             <ul className="space-y-2.5">
               <li>
-                <a 
-                  href="https://github.com/EverydayCodingsLabs/LinkHarbor" 
-                  target="_blank" 
+                <a
+                  href="https://github.com/everydaycodings/LinkHarbor"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
@@ -52,9 +52,9 @@ export function Footer() {
             <h4 className="text-sm font-semibold uppercase tracking-wider">Author</h4>
             <ul className="space-y-2.5">
               <li>
-                <a 
-                  href="https://github.com/everydaycodings" 
-                  target="_blank" 
+                <a
+                  href="https://github.com/everydaycodings"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
@@ -63,9 +63,9 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a 
-                  href="https://everydaycodings.com/" 
-                  target="_blank" 
+                <a
+                  href="https://everydaycodings.com/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >

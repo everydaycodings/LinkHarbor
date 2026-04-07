@@ -54,7 +54,7 @@ LinkHarbor acts as a high-speed relay between restricted networks and fast globa
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/EverydayCodingsLabs/LinkHarbor.git
+   git clone https://github.com/everydaycodings/LinkHarbor.git
    cd LinkHarbor
    ```
 
