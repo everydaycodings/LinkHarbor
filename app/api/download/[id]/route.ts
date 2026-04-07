@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { storage } from '@/lib/storage';
 import fs from 'fs';
+import { Readable } from 'stream';
 import path from 'path';
 
 function getClientIp(req: NextRequest) {
@@ -38,13 +39,14 @@ export async function GET(req: NextRequest, context: { params: Promise<{ id: str
 
   const stats = fs.statSync(filePath);
   const fileStream = fs.createReadStream(filePath);
+  const webStream = Readable.toWeb(fileStream);
 
-  // @ts-expect-error - NextResponse stream compatibility in current types
-  return new NextResponse(fileStream, {
+  return new NextResponse(webStream as any, {
     headers: {
       'Content-Type': metadata.isZip ? 'application/zip' : 'application/octet-stream',
       'Content-Disposition': `attachment; filename="${fileName}"`,
       'Content-Length': stats.size.toString(),
+      'X-Accel-Buffering': 'no', // Disable Nginx proxy buffering
     },
   });
 }

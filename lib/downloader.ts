@@ -73,7 +73,7 @@ export class DownloaderService {
           const now = Date.now();
           const lastUpdate = this.lastUpdateMap.get(updateKey) || 0;
           
-          if (now - lastUpdate > 500) {
+          if (now - lastUpdate > 2000) {
             this.lastUpdateMap.set(updateKey, now);
             this.updateFileProgress(jobId, index, progress).catch(() => {});
           }
