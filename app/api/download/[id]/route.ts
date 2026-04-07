@@ -38,7 +38,7 @@ export async function GET(req: NextRequest, context: { params: Promise<{ id: str
   }
 
   const stats = fs.statSync(filePath);
-  const fileStream = fs.createReadStream(filePath);
+  const fileStream = fs.createReadStream(filePath, { highWaterMark: 1024 * 1024 }); // 1MB Chunks
   const webStream = Readable.toWeb(fileStream);
 
   return new NextResponse(webStream as any, {
@@ -49,6 +49,8 @@ export async function GET(req: NextRequest, context: { params: Promise<{ id: str
       'Accept-Ranges': 'bytes',
       'Cache-Control': 'no-cache, no-transform',
       'X-Accel-Buffering': 'no', // Disable Nginx proxy buffering
+      'Connection': 'keep-alive',
+      'X-Content-Type-Options': 'nosniff',
     },
   });
 }
